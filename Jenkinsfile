@@ -2,11 +2,11 @@ pipeline {
     agent any
     environment
     {
-        VERSION="${BUILD_NUMBER}
-        PROJECT='data-daf-toolkit-ecr'
-        IMAGE="$PROJECT:$VERSION"
-        ECRURL="https://860782241405.dkr.ecr.us-east-2.amazonaws.com"
-        ECRCRED='ecr:ap-us-east-2:awscredentials'
+        VERSION = "${BUILD_NUMBER}"
+        PROJECT = 'data-daf-toolkit-ecr'
+        IMAGE = "$PROJECT:$VERSION"
+        ECRURL = "https://860782241405.dkr.ecr.us-east-2.amazonaws.com"
+        ECRCRED = 'ecr:us-east-2:diego.garcia'
     }
     stages{
         stage('GetSCM'){
@@ -14,7 +14,7 @@ pipeline {
             git'https://github.com/pedidosya/data-analysts-toolkit.git'
         }
         }
-    stages('Images Build'){
+    stage('Images Build'){
         steps{
             script{
                 docker.build('$IMAGE')
