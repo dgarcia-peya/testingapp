@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Data Analytics Toolkit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/bootstrap-datepicker/bootstrap-datepicker.standalone.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/bootstrap-datepicker/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/bootstrap-datepicker/bootstrap-datepicker3.standalone.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block tool_css %}{% endblock tool_css %}
+</head>
+<body id="data-analytics-toolkit">
+    <header>
+        <h2>Analytics Toolkit</h2>
+        <div>User: {{ current_user.email }} <a class="button" href="/logout">Logout</a></div>
+    </header>
+    <aside>
+        <ul>
+            <li>
+                <strong><a href="/dashboard">Dashoard</a></strong>
+            </li>
+            <li>
+                <strong><a href="/ab_testing/">AB Testing Tool</a></strong>
+                <ul>
+                    <li><a href="/ab_testing/list">List</a></li>
+                    <li><a href="/ab_testing/create">Create</a></li>
+                </ul>
+            </li>
+            <li>
+                <strong><a href="/query_automation/">QA Automation Tool</a></strong>
+                <ul>
+                    <li><a href="/query_automation/list">List</a></li>
+                    <li><a href="/query_automation/create">Create</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/libs/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/forms.js') }}"></script>
+
+    {% block tool_js %}{% endblock tool_js %}
+
+</body>
+</html>

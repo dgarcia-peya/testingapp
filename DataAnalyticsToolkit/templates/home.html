@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Data Analytics Toolkit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <h2>Analytics Toolkit</h2>
+    </header>
+    <main>
+        <div>
+            Welcome to the Data Analytics Toolkit!
+            <a class="button" href="/login?next={{ request_path }}">Login with your PEYA account</a>
+        </div>
+    </main>
+</body>
+</html>

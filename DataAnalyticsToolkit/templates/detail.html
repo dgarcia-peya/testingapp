@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Detail</h1>
+{% for field in object.fields %}
+<div><strong>{{ field.label }}:</strong> {{ field.value }}</div>
+{% endfor %}
+{% endblock content %}

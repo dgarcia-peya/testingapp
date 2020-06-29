@@ -1,0 +1,62 @@
+{% extends "list.html" %}
+
+{% block module_extras %}
+<dialog id="finishTestDialog">
+  <form method="dialog" onsubmit="finishTestAction(event)">
+    <div>
+        <strong>Finishing AB Test Report</strong>
+        <br /><br />
+        <div>
+            <label>Whats's the end date of the AB Test?</label>
+            <br />
+            <div
+                    name='ab_test_to_date'
+                    id='ab_test_to_date'
+            >
+            </div>
+        </div>
+        <br />
+        <div>
+            <label>What is the result of this AB Test?</label>
+            <br />
+            <select
+                    name="ab_test_result"
+                    id="ab_test_result"
+                    required
+            >
+                <option></option>
+                <option value="successful">Successful</option>
+                <option value="unsuccessful">Unsuccessful</option>
+                <option value="indecisive">Indecisive</option>
+            </select>
+        </div>
+        <br />
+        <div>
+            <label>Please write a brief explanation of how or why you arrived at the above conclusion?</label>
+            <br />
+            <textarea
+                    name="ab_test_explanation"
+                    id="ab_test_explanation"
+                    required
+            ></textarea>
+        </div>
+    </div>
+    <br />
+    <menu>
+      <button id="confirmButton">Confirm</button>
+      <button value="cancelButton">Cancel</button>
+    </menu>
+  </form>
+</dialog>
+{% endblock module_extras %}
+
+{% block tool_js %}
+<script src="{{ url_for('.static', filename='js/ab_testing.js') }}"></script>
+<script>
+    $('#ab_test_to_date').datepicker({
+        endDate: "today",
+        format: "yyyy-mm-dd"
+    })
+    $("#ab_test_to_date").datepicker("setDate", "today")
+</script>
+{% endblock tool_js %}

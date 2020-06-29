@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>List</h1>
+
+{% for object in objects %}
+<div><strong>Object:</strong> <a href="/{{ object.path }}/detail/{{ object.id }}">{{ object.id }}</a></div>
+<br />
+<div>
+    {% for key, value in object.items() %}
+        <div><strong>{{ key }}:</strong> {{ value }}</div>
+    {% endfor %}
+    {% for action in actions %}
+        <div><button data-id="{{ object.id }}" onclick="{{ action.function }}(event)">{{ action.label }}</button></div>
+    {% endfor %}
+</div>
+<br /><br />
+{% endfor %}
+
+{% block module_extras %}
+{% endblock module_extras %}
+
+{% endblock content %}

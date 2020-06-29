@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Create BigQuery Automation</h1>
+<form id="{{ form.id }}" onsubmit="{{ form.submit_function }}(event)">
+{% for field in form.fields %}
+    <div>
+        <label for='{{ field.name }}'>{{ field.label }} {% if field.required %}*{% endif %}</label>
+        <br />
+        {{ field | form_field }}
+        <br /><br />
+    </div>
+{% endfor %}
+    <button type="submit" id="{{ form.button.name }}" name="{{ form.button.name }}">{{ form.button.text }}</button>
+</form>
+{% endblock content %}
+
+{% block tool_js %}
+<script src="{{ url_for('.static', filename='js/query_automation.js') }}"></script>
+{% endblock tool_js %}
