@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('GetSCM') {
       steps {
-        git 'https://github.com/dgarcia-peya/testingapp'
+        git(url: 'https://github.com/dgarcia-peya/testingapp', branch: 'test01', credentialsId: 'dgarcia-peya')
       }
     }
 
