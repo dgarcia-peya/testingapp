@@ -7,6 +7,12 @@ pipeline {
       }
     }
 
+    stage('Login') {
+      steps {
+        sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 860782241405.dkr.ecr.us-east-2.amazonaws.com'
+      }
+    }
+
     stage('Images Build') {
       steps {
         script {
@@ -18,10 +24,7 @@ pipeline {
 
     stage('Push Image') {
       steps {
-        script {
-          docker.image(IMAGE).push()
-        }
-
+        sh 'docker.image(IMAGE).push()'
       }
     }
 
