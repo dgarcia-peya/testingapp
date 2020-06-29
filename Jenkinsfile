@@ -18,18 +18,19 @@ pipeline {
 
     stage('Push Image') {
       steps {
-        sh '''  docker.withRegistry(\'$ECRURL\', \'$ECRCRED\') {
-    docker.image(\'$IMAGE\').push()
-  }'''
-        }
+        sh '''docker.withRegistry(ECRURL, ECRCRED)
+                {
+                    docker.image(IMAGE).push()
+                }'''
       }
+    }
 
-    }
-    environment {
-      VERSION = "${BUILD_NUMBER}"
-      PROJECT = 'data-daf-toolkit-ecr'
-      IMAGE = "$PROJECT:$VERSION"
-      ECRURL = 'https://860782241405.dkr.ecr.us-east-2.amazonaws.com'
-      ECRCRED = 'ecr:us-east-2:ECR'
-    }
   }
+  environment {
+    VERSION = "${BUILD_NUMBER}"
+    PROJECT = 'data-daf-toolkit-ecr'
+    IMAGE = "$PROJECT:$VERSION"
+    ECRURL = 'https://860782241405.dkr.ecr.us-east-2.amazonaws.com'
+    ECRCRED = 'ecr:us-east-2:ECR'
+  }
+}
