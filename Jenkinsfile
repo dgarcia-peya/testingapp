@@ -14,7 +14,7 @@ pipeline {
             git'https://github.com/pedidosya/data-analysts-toolkit.git'
         }
         }
-    stages('Images Build'){
+    stage('Images Build'){
         steps{
             script{
                 docker.build('$IMAGE')
