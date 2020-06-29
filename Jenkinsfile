@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment
     {
-        VERSION="${BUILD_NUMBER}
+        VERSION="${BUILD_NUMBER}"
         PROJECT='data-daf-toolkit-ecr'
         IMAGE="$PROJECT:$VERSION"
         ECRURL="https://860782241405.dkr.ecr.us-east-2.amazonaws.com"
