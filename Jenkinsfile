@@ -1,45 +1,45 @@
 pipeline {
-  agent any
-  stages {
-    stage('GetSCM') {
-      steps {
-        git 'https://github.com/dgarcia-peya/testingapp'
-      }
+    agent any
+    environment
+    {
+        VERSION = "${BUILD_NUMBER}"
+        PROJECT = 'data-daf-toolkit-ecr'
+        IMAGE = "$PROJECT:$VERSION"
+        ECRURL = "https://860782241405.dkr.ecr.us-east-2.amazonaws.com"
+        ECRCRED = 'ecr:us-east-2:diego.garcia'
     }
-
-    stage('Images Build') {
-      steps {
-        script {
-          docker.build('$IMAGE')
+    stages{
+        stage('GetSCM'){
+        steps{
+            git'https://github.com/pedidosya/data-analysts-toolkit.git'
         }
-
-      }
-    }
-
-    stage('Push Image') {
-      steps {
-        script {
-          docker.withRegistry(ECRURL, ECRCRED)
-          {
-            docker.image(IMAGE).push()
-          }
         }
-
-      }
+    stage('Images Build'){
+        steps{
+            script{
+                docker.build('$IMAGE')
+            }
+        }
     }
-
-  }
-  environment {
-    VERSION = "${BUILD_NUMBER}"
-    PROJECT = 'data-daf-toolkit-ecr'
-    IMAGE = "$PROJECT:$VERSION"
-    ECRURL = 'https://860782241405.dkr.ecr.us-east-2.amazonaws.com'
-    ECRCRED = 'ecr:ap-us-east-2:awscredentials'
-  }
-  post {
-    always {
-      sh "docker rmi $IMAGE | true"
+    stage('Push Image'){
+        steps{
+            script
+            {
+                docker.withRegistry(ECRURL, ECRCRED)
+                {
+                    docker.image(IMAGE).push()
+                }
+            }
+        }
     }
+}
 
-  }
+post 
+{
+    always
+    {
+        // make sure that the Docker image is removed
+        sh "docker rmi $IMAGE | true"
+    }
+}
 }
