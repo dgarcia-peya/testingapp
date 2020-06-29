@@ -7,12 +7,6 @@ pipeline {
       }
     }
 
-    stage('Login') {
-      steps {
-        sh 'aws ecr get-login --no-include-email --region us-east-2 | docker login --username AWS --password-stdin 860782241405.dkr.ecr.us-east-2.amazonaws.com'
-      }
-    }
-
     stage('Images Build') {
       steps {
         script {
@@ -24,16 +18,18 @@ pipeline {
 
     stage('Push Image') {
       steps {
-        sh 'docker.image(IMAGE).push()'
+        sh '''  docker.withRegistry(\'$ECRURL\', \'$ECRCRED\') {
+    docker.image(\'$IMAGE\').push()
+  }'''
+        }
       }
-    }
 
+    }
+    environment {
+      VERSION = "${BUILD_NUMBER}"
+      PROJECT = 'data-daf-toolkit-ecr'
+      IMAGE = "$PROJECT:$VERSION"
+      ECRURL = 'https://860782241405.dkr.ecr.us-east-2.amazonaws.com'
+      ECRCRED = 'ecr:us-east-2:ECR'
+    }
   }
-  environment {
-    VERSION = "${BUILD_NUMBER}"
-    PROJECT = 'data-daf-toolkit-ecr'
-    IMAGE = "$PROJECT:$VERSION"
-    ECRURL = 'https://860782241405.dkr.ecr.us-east-2.amazonaws.com'
-    ECRCRED = 'ecr:us-east-2:diego.garcia'
-  }
-}
