@@ -36,10 +36,4 @@ pipeline {
     ECRURL = 'https://860782241405.dkr.ecr.us-east-2.amazonaws.com'
     ECRCRED = 'ecr:us-east-2:diego.garcia'
   }
-  post {
-    always {
-      sh "docker rmi $IMAGE | true"
-    }
-
-  }
 }
