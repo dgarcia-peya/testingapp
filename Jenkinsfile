@@ -18,7 +18,7 @@ pipeline {
 
     stage('Push Image') {
       steps {
-        sh '''docker.withRegistry(ECRURL, ECRCRED)
+        sh '''docker.withRegistry(https://860782241405.dkr.ecr.us-east-2.amazonaws.com, ecr:us-east-2:ECR)
                 {
                     docker.image(IMAGE).push()
                 }'''
