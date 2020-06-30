@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('GetSCM') {
       steps {
-        git 'https://github.com/pedidosya/data-analysts-toolkit'
+        git 'https://github.com/dgarcia-peya/testingapp'
       }
     }
 
