@@ -5,6 +5,7 @@ pipeline {
     stage('Test') {
         agent {
             ecs {
+                label 'analytics-toolkit'
                 inheritFrom 'analytics-toolkit-jnlp-slave'
                 cpu 2048
                 memory 4096
