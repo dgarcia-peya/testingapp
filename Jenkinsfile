@@ -7,8 +7,6 @@ pipeline {
             ecs {
                 label 'jenkins-slave'
                 inheritFrom 'jenkins-slave'
-                cpu 2048
-                memory 4096
                 image 'jenkins/jnlp-slave'
                 logDriver 'fluentd'
                 logDriverOptions([[name: 'foo', value:'bar'], [name: 'bar', value: 'foo']])
