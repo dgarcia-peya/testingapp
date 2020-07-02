@@ -45,10 +45,5 @@ pipeline {
     GOOGLE_APPLICATION_CREDENTIALS = 'Google Cloud Credentials json file path'
     BIG_QUERY_PROJECT = 'Google BigQuery Project'
     BIG_QUERY_DATA_SET = 'Google BigQuery Dataset'
-    VERSION = "${BUILD_NUMBER}"
-    PROJECT = 'data-daf-toolkit-ecr'
-    IMAGE = "$PROJECT:$VERSION"
-    ECRURL = 'https://860782241405.dkr.ecr.us-east-2.amazonaws.com'
-    ECRCRED = 'ecr:us-east-2:ECR'
   }
 }
