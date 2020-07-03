@@ -1,11 +1,14 @@
 pipeline {
-  agent { label 'peya-data-ecs-jenkins-slave' }
+  agent {
+    label 'peya-data-ecs-jenkins-slave'
+  }
   stages {
     stage('GetSCM') {
       steps {
-        checkout(scm: scm)
+        checkout scm
       }
     }
+
     stage('Images Build') {
       steps {
         script {
