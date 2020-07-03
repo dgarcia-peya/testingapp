@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'jenkins-slave' }
+  agent { label 'peya-data-ecs-jenkins-slave' }
   stages {
     stage('GetSCM') {
       steps {
